@@ -3,12 +3,12 @@
 The end goal of this program is to use a <a href="https://en.wikipedia.org/wiki/Maze_generation_algorithm">depth first search algorithm</a> to generate a random maze of any size. <br>
 </h3>
 
-<img src="https://github.com/League-level5/MazeMaker/blob/master/maze.png?raw=true" width="300" height="300"> <br>
+<img src="https://github.com/League-level4/League-level4.github.io/blob/master/maze_complete.png?raw=true" width="300" height="300"> <br>
 
 <h3>
 The result of running the program currently gives us only a grid. <br>
 </h3>
-<img src="https://github.com/League-level5/MazeMaker/blob/master/maze_incomplete.png?raw=true" width="300" height="300"> <br><br>
+<img src="https://github.com/League-level4/League-level4.github.io/blob/master/maze_incomplete.png?raw=true" width="300" height="300"> <br><br>
 
 <h4>
 In the MazeMaker class, complete the generateMaze method, selectNextPath method, the removeWalls method, and the getUnvisitedNeighbors method to generate a random maze. <br><br>
@@ -20,4 +20,9 @@ removeWalls takes in two cells. It then figures out the relationship between the
 selectNextPath is a recursive method that uses the depth first search alogorithm to determine which walls to remove.<br><br>
 generateMaze will create a maze with the given dimensions, select a cell at random, and call the selectNextPath method using that random cell.
 </h5>
+  
+<h4>
+When the maze maker is generating correct mazes, pick a random cell along the border and remove its exterior wall. This will be the starting point. Then select a random cell along the opposite wall and remove its exterior wall. This will be the finish line.
+</h4>
+<img src="https://github.com/League-level4/League-level4.github.io/blob/master/maze_with_exit.png?raw=true" width="300" height="300">
 </html>
