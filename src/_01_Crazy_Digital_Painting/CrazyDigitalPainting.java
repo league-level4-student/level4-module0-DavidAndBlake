@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class CrazyDigitalPainting {
 	//1. Create two final static integers for the width and height of the display.
-static int width = 2500;
+static int width = 1000;
 static int height = 700;
 	
 	//2. Create a 2D array of Color objects. You will need to import
