@@ -32,15 +32,15 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		if (w < h) {
 			cellSize = w / cellsPerRow;
 		} else {
-			cellSize = h/cellsPerRow;
+			cellSize = h / cellsPerRow;
 		}
 		// 3. Initialize the cell array to the appropriate size.
 		cell = new Cell[cellsPerRow][cellsPerRow];
 		// 3. Iterate through the array and initialize each cell.
 		// Don't forget to consider the cell's dimensions when
 		// passing in the location.
-		for(int i = 0; i < cellsPerRow; i++) {
-			for(int j = 0; j < cellsPerRow; j++) {
+		for (int i = 0; i < cellsPerRow; i++) {
+			for (int j = 0; j < cellsPerRow; j++) {
 				cell[i][j] = new Cell(i, j, cellSize);
 			}
 		}
@@ -49,13 +49,27 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	public void randomizeCells() {
 		// 4. Iterate through each cell and randomly set each
 		// cell's isAlive memeber to true of false
-
+		int rando = (int) (Math.random() * 2);
+		for (int i = 0; i < cellsPerRow; i++) {
+			for (int j = 0; j < cell.length; j++) {
+				if (rando > 0) {
+					cell[i][j].isAlive = true;
+				}
+				else {
+					cell[i][j].isAlive = false;
+				}
+			}
+		}
 		repaint();
 	}
 
 	public void clearCells() {
 		// 5. Iterate through the cells and set them all to dead.
-
+		for (int i = 0; i < cellsPerRow; i++) {
+			for (int j = 0; j < cell.length; j++) {
+					cell[i][j].isAlive = false;
+			}
+		}
 		repaint();
 	}
 
@@ -74,7 +88,11 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	@Override
 	public void paintComponent(Graphics g) {
 		// 6. Iterate through the cells and draw them all
-
+		for (int i = 0; i < cellsPerRow; i++) {
+			for (int j = 0; j < cell.length; j++) {
+				cell[i][j].draw(g);
+			}
+		}
 		// draws grid
 		g.setColor(Color.BLACK);
 		g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
