@@ -54,8 +54,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 			for (int j = 0; j < cell.length; j++) {
 				if (rando > 0) {
 					cell[i][j].isAlive = true;
-				}
-				else {
+				} else {
 					cell[i][j].isAlive = false;
 				}
 			}
@@ -67,7 +66,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 5. Iterate through the cells and set them all to dead.
 		for (int i = 0; i < cellsPerRow; i++) {
 			for (int j = 0; j < cell.length; j++) {
-					cell[i][j].isAlive = false;
+				cell[i][j].isAlive = false;
 			}
 		}
 		repaint();
@@ -103,9 +102,16 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 7. iterate through cells and fill in the livingNeighbors array
 		// . using the getLivingNeighbors method.
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
+		for (int i = 0; i < cell.length; i++) {
+			for (int j = 0; j < livingNeighbors.length; j++) {
+				livingNeighbors[i][j] = getLivingNeighbors(i, j);
+				if (getLivingNeighbors(i, j) > 3) {
 
-		// 8. check if each cell should live or die
-
+					// 8. check if each cell should live or die
+					cell[i][j].isAlive = false;
+				}
+			}
+		}
 		repaint();
 	}
 
@@ -114,7 +120,15 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	// living neighbors there are of the
 	// cell identified by x and y
 	public int getLivingNeighbors(int x, int y) {
-		return 0;
+		int livingNeighborCount = 0;
+		for (int i = -1; i <= 1; i++) {
+			for (int j = -1; j <= 1; j++) {
+				if (cell[x + i][y + j].isAlive && (i != 0 && j != 0)) {
+					livingNeighborCount++;
+				}
+			}
+		}
+		return livingNeighborCount;
 	}
 
 	@Override
@@ -139,7 +153,8 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 10. Use e.getX() and e.getY() to determine
 		// which cell is clicked. Then toggle
 		// the isAlive variable for that cell.
-
+		if (cell[e.getX()][e.getY()])
+		
 		repaint();
 	}
 
