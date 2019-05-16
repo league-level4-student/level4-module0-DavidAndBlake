@@ -30,10 +30,11 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 
 		// 2. Calculate the cell size.
 		if (w < h) {
-			cellSize = w / cellsPerRow;
+			cellSize = w / cpr;
 		} else {
-			cellSize = h / cellsPerRow;
+			cellSize = h / cpr;
 		}
+		System.out.println(cellSize);
 		// 3. Initialize the cell array to the appropriate size.
 		cell = new Cell[cellsPerRow][cellsPerRow];
 		// 3. Iterate through the array and initialize each cell.
@@ -41,7 +42,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// passing in the location.
 		for (int i = 0; i < cellsPerRow; i++) {
 			for (int j = 0; j < cellsPerRow; j++) {
-				cell[i][j] = new Cell(i, j, cellSize);
+				cell[i][j] = new Cell(i * cellSize, j * cellSize, cellSize);
 			}
 		}
 	}
