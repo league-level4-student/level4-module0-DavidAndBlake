@@ -50,9 +50,10 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	public void randomizeCells() {
 		// 4. Iterate through each cell and randomly set each
 		// cell's isAlive memeber to true of false
-		int rando = (int) (Math.random() * 2);
+
 		for (int i = 0; i < cellsPerRow; i++) {
 			for (int j = 0; j < cell.length; j++) {
+				int rando = (int) (Math.random() * 2);
 				if (rando > 0) {
 					cell[i][j].isAlive = true;
 				} else {
@@ -106,11 +107,9 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		for (int i = 0; i < cell.length; i++) {
 			for (int j = 0; j < livingNeighbors.length; j++) {
 				livingNeighbors[i][j] = getLivingNeighbors(i, j);
-				if (getLivingNeighbors(i, j) > 3) {
 
 					// 8. check if each cell should live or die
-					cell[i][j].isAlive = false;
-				}
+					cell[i][j].liveOrDie(livingNeighbors[i][j]);
 			}
 		}
 		repaint();
@@ -124,8 +123,10 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		int livingNeighborCount = 0;
 		for (int i = -1; i <= 1; i++) {
 			for (int j = -1; j <= 1; j++) {
-				if (cell[x + i][y + j].isAlive && (i != 0 && j != 0)) {
-					livingNeighborCount++;
+				if (x + i >= 0 && y + j >= 0 && x+i < 50 && y+j < 50) {
+					if (cell[x + i][y + j].isAlive && (i != 0 && j != 0)) {
+						livingNeighborCount++;
+					}
 				}
 			}
 		}
@@ -154,15 +155,14 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 10. Use e.getX() and e.getY() to determine
 		// which cell is clicked. Then toggle
 		// the isAlive variable for that cell.
-	int cellX = e.getX()/cellSize;
-	int cellY = e.getY()/cellSize;
-	if(cell[cellX][cellY].isAlive == true) {
-		cell[cellX][cellY].isAlive = false;
-	}
-	else {
-		cell[cellX][cellY].isAlive = true;
-	}
-		
+		int cellX = e.getX() / cellSize;
+		int cellY = e.getY() / cellSize;
+		if (cell[cellX][cellY].isAlive == true) {
+			cell[cellX][cellY].isAlive = false;
+		} else {
+			cell[cellX][cellY].isAlive = true;
+		}
+
 		repaint();
 	}
 
