@@ -105,19 +105,19 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// . using the getLivingNeighbors method.
 		int[][] livingNeighbors = new int[cellsPerRow][cellsPerRow];
 		for (int i = 0; i < cell.length; i++) {
-			for (int j = 0; j < livingNeighbors.length; j++) {
+			for (int j = 0; j < cell[i].length; j++) {
 				livingNeighbors[i][j] = getLivingNeighbors(i, j);
-					
+
 			}
 		}
-		
+
 		// 8. check if each cell should live or die
 		for (int i = 0; i < livingNeighbors.length; i++) {
-			for (int j = 0; j < livingNeighbors.length; j++) {
+			for (int j = 0; j < livingNeighbors[i].length; j++) {
 				cell[i][j].liveOrDie(livingNeighbors[i][j]);
 			}
 		}
-					
+
 		repaint();
 	}
 
@@ -127,36 +127,51 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	// cell identified by x and y
 	public int getLivingNeighbors(int x, int y) {
 		int livingNeighborCount = 0;
-		if(x > 0 && y > 0 && x < cellsPerRow-1 && y < cellsPerRow-1){
-			if(cell[x-1][y-1].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x][y-1].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x+1][y-1].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x-1][y].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x+1][y].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x-1][y+1].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x][y+1].isAlive) {
-				livingNeighborCount++;
-			}
-			if(cell[x+1][y+1].isAlive) {
+		if (x > 0) {
+
+			if (cell[x - 1][y].isAlive) {
 				livingNeighborCount++;
 			}
 		}
-				
-		
+		if (x > 0 && y < cellsPerRow-1) {
+			if (cell[x - 1][y + 1].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+		if (y > 0) {
+			if (cell[x][y - 1].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+		if (x < cellsPerRow-1 && y > 0) {
+			if (cell[x + 1][y - 1].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+		if (x > 0 && y > 0) {
+			if (cell[x - 1][y - 1].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+		if (x < cellsPerRow-1) {
+			if (cell[x + 1][y].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+		if (y < cellsPerRow-1) {
+			if (cell[x][y + 1].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+		if (x < cellsPerRow-1 && y < cellsPerRow-1) {
+			if (cell[x + 1][y + 1].isAlive) {
+				livingNeighborCount++;
+			}
+		}
+
 		System.out.println(livingNeighborCount);
 		return livingNeighborCount;
+
 	}
 
 	@Override
