@@ -26,6 +26,18 @@ public class MazeMaker {
 		// 5. call selectNextPath method with the randomly selected cell
 		selectNextPath(s);
 
+		int r = randGen.nextInt(height);
+		int v = randGen.nextInt(width);
+		
+		Cell start = maze.cells[0][r];
+		Cell end = maze.cells[width-1][v];
+		
+		start.setWestWall(false);
+		end.setEastWall(false);
+		
+		
+		
+		
 		return maze;
 	}
 
@@ -114,6 +126,7 @@ public class MazeMaker {
 				nBors.add(maze.cells[c.getX()][c.getY()+1]);
 			}
 		}
+		
 		return nBors;
 
 	}
